@@ -13,8 +13,8 @@ Servo myServo2;
 #define in4   18
 
 int motorSpeed = 0;
-int goc1;
-int goc2;
+int goc1=80;
+int goc2=55;
 typedef struct struct_message {
     int joyX1;
     int joyY1;
@@ -79,17 +79,17 @@ void OnDataRecv(const esp_now_recv_info *info, const uint8_t *data, int len) {
   //Điều khiển servo1 từ 0-180
   if(abs(joyY2 -2050) > 700){
     if (joyY2 < 1700) {
-        goc1 = map(joyY2, 0, 1700, 0, 90);
+        goc1 = map(joyY2, 0, 1700, 85, 130);
     } else if (joyY2 > 3200) {
-        goc1 = map(joyY2,3200, 4095, 90, 180);
+        goc1 = map(joyY2,3200, 4095, 30, 60);
     }}
   //Điều khiển servo2 từ 0-180
  if(abs(joyX2 - 2050) > 700){
   if(joyX2 < 1700){
-    goc2= map(joyX2, 0, 1700, 0, 90);
+    goc2= map(joyX2, 0, 1700, 70, 75);
   }
   else if(joyX2 > 3200){
-    goc2= map(joyX2, 3200, 4095, 90, 180);
+    goc2= map(joyX2, 3200, 4095, 30, 40);
   }
     }
       myServo1.write(goc1);
